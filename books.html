@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Add Book</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ===== BODY ===== */
+body{
+    min-height:100vh;
+    background: linear-gradient(135deg,#1d2671,#c33764);
+    color:white;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(14px);
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 100;
+}
+.logo{
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffeb3b;
+}
+.nav-links a{
+    margin-left: 18px;
+    color: #ffd180;
+    text-decoration: none;
+    font-weight: 500;
+    transition: .3s;
+}
+.nav-links a:hover{
+    color: white;
+}
+
+/* ===== PAGE CENTER ===== */
+.page{
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== CARD ===== */
+.card{
+    width:380px;
+    background:rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 25px 50px rgba(0,0,0,0.4);
+}
+.card h1{
+    text-align:center;
+    margin-bottom:25px;
+    font-size:26px;
+}
+
+/* ===== INPUTS ===== */
+.input-box{
+    margin-bottom:15px;
+}
+.input-box input{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+    font-size:14px;
+}
+
+/* ===== BUTTON ===== */
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(to right,#ff9800,#ff5722);
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(255,87,34,.5);
+}
+
+/* ===== LINK ===== */
+.link{
+    text-align:center;
+    margin-top:18px;
+}
+.link a{
+    color:#ffd180;
+    text-decoration:none;
+    font-weight:500;
+}
+ /* ===== FLOATING CIRCLES ===== */
+        .circles span{
+            position:absolute;
+            bottom:-150px;
+            width:60px;
+            height:60px;
+            background:rgba(255,255,255,0.15);
+            border-radius:50%;
+            animation: float 20s linear infinite;
+        }
+
+        .circles span:nth-child(1){left:10%;width:80px;height:80px;}
+        .circles span:nth-child(2){left:30%;animation-duration:18s;}
+        .circles span:nth-child(3){left:50%;width:100px;height:100px;}
+        .circles span:nth-child(4){left:70%;}
+        .circles span:nth-child(5){left:90%;width:70px;height:70px;}
+
+        @keyframes float{
+            0%{transform:translateY(0);opacity:1;}
+            100%{transform:translateY(-1200px);opacity:0;}
+        }
+</style>
+</head>
+
+<body>
+<div class="circles">
+    <span></span><span></span><span></span><span></span><span></span>
+</div>
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+    <div class="logo">📘 BookStore</div>
+    <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="view-books.html"> View Books</a>
+        <a href="books.html">Add Books</a>
+          <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="index.html">Logout</a>
+    </div>
+</nav>
+
+<!-- ===== PAGE CONTENT ===== -->
+<div class="page">
+    <div class="card">
+        <h1>➕ Add Book</h1>
+
+        <div class="input-box">
+            <input type="text" id="title" placeholder="Book Title">
+        </div>
+
+        <div class="input-box">
+            <input type="text" id="author" placeholder="Author Name">
+        </div>
+
+        <div class="input-box">
+            <input type="number" id="price" placeholder="Price (₹)">
+        </div>
+
+        <button onclick="addBook()">Save Book</button>
+
+        <div class="link">
+            <a href="view-books.html">📚 View Books</a>
+        </div>
+    </div>
+</div>
+
+<script src="js/books.js"></script>
+</body>
+</html>

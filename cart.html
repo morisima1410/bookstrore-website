@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cart | Online Book Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ===== BODY ===== */
+body{
+    min-height:100vh;
+    background: linear-gradient(135deg,#1d2671,#c33764);
+    color:white;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(14px);
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 100;
+}
+.logo{
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffeb3b;
+}
+.nav-links a{
+    margin-left: 20px;
+    color: #ffd180;
+    text-decoration: none;
+    font-weight: 500;
+    transition: .3s;
+}
+.nav-links a:hover{
+    color: white;
+}
+
+/* ===== PAGE CONTENT ===== */
+.page{
+    padding: 30px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+/* ===== CART TABLE ===== */
+table{
+    width:100%;
+    border-collapse: collapse;
+    background: rgba(255,255,255,0.12);
+    border-radius:12px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+th, td{
+    padding:12px;
+    text-align:left;
+}
+th{
+    background: linear-gradient(to right,#ff9800,#ff5722);
+    color:white;
+}
+tr:nth-child(even){
+    background: rgba(255,255,255,0.05);
+}
+td img{
+    width:60px;
+    height:80px;
+    object-fit: cover;
+    border-radius:8px;
+    margin-right:10px;
+    vertical-align:middle;
+}
+
+/* ===== BUTTONS ===== */
+.btn{
+    padding:8px 15px;
+    border:none;
+    border-radius:25px;
+    background: linear-gradient(to right,#ff9800,#ff5722);
+    color:white;
+    cursor:pointer;
+    font-weight:600;
+    transition:0.3s;
+}
+.btn:hover{
+    background: linear-gradient(to right,#ff5722,#ff9800);
+    transform: scale(1.05);
+}
+
+/* ===== TOTAL ===== */
+.total{
+    font-size:20px;
+    font-weight:bold;
+    margin-top:15px;
+    text-align:right;
+}
+
+/* ===== EMPTY CART ===== */
+.empty-cart{
+    text-align:center;
+    font-size:18px;
+    color:#ffd180;
+    padding:20px 0;
+}
+ /* ===== FLOATING CIRCLES ===== */
+        .circles span{
+            position:absolute;
+            bottom:-150px;
+            width:60px;
+            height:60px;
+            background:rgba(255,255,255,0.15);
+            border-radius:50%;
+            animation: float 20s linear infinite;
+        }
+
+        .circles span:nth-child(1){left:10%;width:80px;height:80px;}
+        .circles span:nth-child(2){left:30%;animation-duration:18s;}
+        .circles span:nth-child(3){left:50%;width:100px;height:100px;}
+        .circles span:nth-child(4){left:70%;}
+        .circles span:nth-child(5){left:90%;width:70px;height:70px;}
+
+        @keyframes float{
+            0%{transform:translateY(0);opacity:1;}
+            100%{transform:translateY(-1200px);opacity:0;}
+        }
+
+</style>
+</head>
+<body>
+<div class="circles">
+    <span></span><span></span><span></span><span></span><span></span>
+</div>
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="logo">📚 Online Book Store</div>
+    <div class="nav-links">
+        <a href="home.html">Home</a>
+        <a href="view-books.html">View Books</a>
+        <a href="books.html">Add Books</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="index.html">Logout</a>
+    </div>
+</div>
+
+<div class="page">
+    <h1>🛒 Your Cart</h1>
+
+    <table id="cartTable">
+        <thead>
+            <tr>
+                <th>Book</th>
+                <th>Price (₹)</th>
+                <th>Quantity</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody id="cartBody">
+            <!-- JS will populate cart items -->
+        </tbody>
+    </table>
+
+    <div class="total" id="totalPrice">Total: ₹0</div>
+    <div style="text-align:right; margin-top:10px;">
+        <button class="btn" onclick="clearCart()">Clear Cart</button>
+    </div>
+</div>
+
+<script>
+// Load Cart from localStorage
+function loadCart(){
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartBody = document.getElementById("cartBody");
+    const totalPrice = document.getElementById("totalPrice");
+
+    cartBody.innerHTML = "";
+
+    if(cart.length === 0){
+        cartBody.innerHTML = `<tr><td colspan="4" class="empty-cart">Your cart is empty 😢</td></tr>`;
+        totalPrice.innerText = "Total: ₹0";
+        return;
+    }
+
+    let total = 0;
+
+    cart.forEach((book, index)=>{
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${book.title}</td>
+            <td>₹${book.price}</td>
+            <td>1</td>
+            <td><button class="btn" onclick="removeItem(${index})">Remove</button></td>
+        `;
+        cartBody.appendChild(tr);
+        total += Number(book.price);
+    });
+
+    totalPrice.innerText = "Total: ₹" + total;
+}
+
+function removeItem(index){
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.splice(index,1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    loadCart();
+}
+
+function clearCart(){
+    localStorage.removeItem("cart");
+    loadCart();
+}
+
+// Initial load
+loadCart();
+</script>
+
+</body>
+</html>

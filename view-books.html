@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Book List</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ===== BODY ===== */
+body{
+    min-height:100vh;
+    background: linear-gradient(135deg,#1d2671,#c33764);
+    color:white;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(14px);
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 100;
+}
+.logo{
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffeb3b;
+}
+.nav-links a{
+    margin-left: 20px;
+    color: #ffd180;
+    text-decoration: none;
+    font-weight: 500;
+    transition: .3s;
+}
+.nav-links a:hover{
+    color: white;
+}
+
+/* ===== PAGE CONTENT ===== */
+.page{
+    padding: 30px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+/* ===== GRID ===== */
+.grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    gap:20px;
+    max-width:1100px;
+    margin:auto;
+}
+
+.book-card{
+    background:rgba(255,255,255,0.12);
+    backdrop-filter: blur(12px);
+    padding:20px;
+    border-radius:16px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    transition:.3s;
+}
+.book-card:hover{
+    transform:translateY(-5px);
+}
+.book-card h3{
+    color:#ffeb3b;
+    margin-bottom:8px;
+}
+.price{
+    margin-top:8px;
+    font-weight:600;
+}
+
+/* ===== FOOTER LINK ===== */
+.back{
+    text-align:center;
+    margin-top:30px;
+}
+.back a{
+    color:#ffd180;
+    text-decoration:none;
+    font-weight:500;
+}
+.cart-btn{
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(to right, #ff9800, #ff5722);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+}
+
+.cart-btn:hover{
+    transform: scale(1.05);
+    background: linear-gradient(to right, #ff5722, #ff9800);
+}
+ /* ===== FLOATING CIRCLES ===== */
+        .circles span{
+            position:absolute;
+            bottom:-150px;
+            width:60px;
+            height:60px;
+            background:rgba(255,255,255,0.15);
+            border-radius:50%;
+            animation: float 20s linear infinite;
+        }
+
+        .circles span:nth-child(1){left:10%;width:80px;height:80px;}
+        .circles span:nth-child(2){left:30%;animation-duration:18s;}
+        .circles span:nth-child(3){left:50%;width:100px;height:100px;}
+        .circles span:nth-child(4){left:70%;}
+        .circles span:nth-child(5){left:90%;width:70px;height:70px;}
+
+        @keyframes float{
+            0%{transform:translateY(0);opacity:1;}
+            100%{transform:translateY(-1200px);opacity:0;}
+        }
+        /* ===== COMMON BUTTON STYLE ===== */
+.cart-btn,
+.update-btn,
+.delete-btn{
+    display:inline-block;
+    margin-top:12px;
+    padding:12px 22px;
+    border:none;
+    border-radius:30px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    color:#fff;
+    transition:0.3s ease;
+}
+
+/* ===== ADD TO CART ===== */
+.cart-btn{
+    background:linear-gradient(to right,#00c6ff,#0072ff);
+}
+
+.cart-btn:hover{
+    transform:scale(1.05);
+    background:linear-gradient(to right,#0072ff,#00c6ff);
+}
+
+/* ===== UPDATE BUTTON ===== */
+.update-btn{
+    margin-left:6px;
+    background:linear-gradient(to right,#ff9800,#ff5722);
+}
+
+.update-btn:hover{
+    transform:scale(1.05);
+    background:linear-gradient(to right,#ff5722,#ff9800);
+}
+
+/* ===== DELETE BUTTON ===== */
+.delete-btn{
+    margin-left:6px;
+    background:linear-gradient(to right,#e53935,#b71c1c);
+}
+
+.delete-btn:hover{
+    transform:scale(1.05);
+    background:linear-gradient(to right,#b71c1c,#e53935);
+}
+
+
+</style>
+</head>
+
+<body>
+<div class="circles">
+    <span></span><span></span><span></span><span></span><span></span>
+</div>
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+    <div class="logo">📘 BookStore</div>
+    <div class="nav-links">
+         <a href="home.html">Home</a>
+        <a href="view-books.html"> View Books</a>
+        <a href="books.html">Add Books</a>
+          <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+        <a href="index.html">Logout</a>
+    </div>
+</nav>
+
+<!-- ===== CONTENT ===== -->
+<div class="page">
+    <h1>📚 Available Books</h1>
+    <div id="bookList" class="grid"></div>
+
+    <div class="back">
+        <a href="books.html">➕ Add New Book</a>
+    </div>
+</div>
+
+<script src="js/books.js"></script>
+</body>
+</html>

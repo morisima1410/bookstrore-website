@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Online Book Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:"Poppins", sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            background: linear-gradient(135deg,#1d2671,#c33764);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            overflow:hidden;
+            color:white;
+        }
+
+        /* ===== FLOATING BACKGROUND ===== */
+        .circles span{
+            position:absolute;
+            bottom:-150px;
+            width:60px;
+            height:60px;
+            background:rgba(255,255,255,0.15);
+            border-radius:50%;
+            animation: float 20s linear infinite;
+        }
+
+        .circles span:nth-child(1){left:10%;width:80px;height:80px;}
+        .circles span:nth-child(2){left:30%;animation-duration:18s;}
+        .circles span:nth-child(3){left:50%;width:100px;height:100px;}
+        .circles span:nth-child(4){left:70%;}
+        .circles span:nth-child(5){left:90%;width:70px;height:70px;}
+
+        @keyframes float{
+            0%{transform:translateY(0);opacity:1;}
+            100%{transform:translateY(-1200px);opacity:0;}
+        }
+
+        /* ===== LOGIN BOX ===== */
+        .form-box{
+            width:350px;
+            background:rgba(255,255,255,0.12);
+            backdrop-filter:blur(12px);
+            padding:40px;
+            border-radius:18px;
+            box-shadow:0 25px 50px rgba(0,0,0,0.4);
+            text-align:center;
+            position:relative;
+            z-index:2;
+        }
+
+        .form-box h2{
+            margin-bottom:25px;
+            font-size:28px;
+        }
+
+        .input-box{
+            margin-bottom:18px;
+        }
+
+        .input-box input{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:10px;
+            outline:none;
+            font-size:14px;
+        }
+
+        .form-box button{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:30px;
+            background:linear-gradient(to right,#ff9800,#ff5722);
+            color:white;
+            font-size:16px;
+            font-weight:600;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        .form-box button:hover{
+            transform:translateY(-2px);
+            box-shadow:0 10px 25px rgba(255,87,34,.5);
+        }
+
+        .form-link{
+            margin-top:18px;
+            font-size:14px;
+        }
+
+        .form-link a{
+            color:#ffd180;
+            text-decoration:none;
+            font-weight:500;
+        }
+
+        .form-link a:hover{
+            text-decoration:underline;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<div class="circles">
+    <span></span><span></span><span></span><span></span><span></span>
+</div> 
+
+<!-- LOGIN FORM -->
+<div class="form-box">
+    <h2>Login</h2>
+
+    <form onsubmit="loginUser(); return false;">
+        <div class="input-box">
+            <input type="email" id="loginEmail" placeholder="Email Address" required>
+        </div>
+
+        <div class="input-box">
+            <input type="password" id="loginPassword" placeholder="Password" required>
+        </div>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="form-link">
+        Don’t have an account?
+        <a href="register.html">Register</a>
+    </div>
+</div>
+
+<script src="js/auth.js"></script>
+
+</body>
+</html>
