@@ -35,6 +35,7 @@ bookstore-website/
 │   └── server.js
 │
 ├── css/
+     |__style.css
 ├── js/
 │   ├── auth.js
 │   └── books.js
